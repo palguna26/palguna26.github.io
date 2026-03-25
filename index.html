@@ -6,10 +6,6 @@
   <title>Palguna Shetty | Portfolio</title>
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-  />
 
   <script>
     tailwind.config = {
@@ -77,28 +73,12 @@
       transform: translateY(-2px);
     }
 
-    .nav-link {
-      @apply uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors;
-    }
-
-    .nav-link-active {
-      @apply text-accent border-b border-accent;
-    }
-
-    .chip {
-      @apply p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors;
-    }
-
-    .section-title {
-      @apply text-3xl md:text-4xl font-semibold tracking-tight uppercase;
-    }
-
-    .mono-label {
-      @apply text-[11px] uppercase tracking-[0.25em] font-mono text-accent;
-    }
-
     .material-symbols-outlined {
-      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      font-family: sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -112,17 +92,17 @@
     <nav class="fixed top-0 left-0 right-0 z-50 border-b border-accent/10 bg-black/80 backdrop-blur-xl">
       <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-accent">terminal</span>
+          <span class="text-accent text-xl">⌘</span>
           <span class="text-lg md:text-xl font-semibold tracking-tight text-accent">
             Palguna_DEV
           </span>
         </div>
 
         <div class="hidden md:flex gap-8">
-          <a href="#hero" class="nav-link nav-link-active">Home</a>
-          <a href="#projects" class="nav-link">Projects</a>
-          <a href="#skills" class="nav-link">Stack</a>
-          <a href="#education" class="nav-link">Bio</a>
+          <a href="#hero" class="uppercase tracking-[0.2em] text-xs text-accent border-b border-accent">Home</a>
+          <a href="#projects" class="uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors">Projects</a>
+          <a href="#skills" class="uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors">Stack</a>
+          <a href="#education" class="uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors">Bio</a>
         </div>
 
         <a
@@ -139,7 +119,9 @@
       <section id="hero" class="min-h-[72vh] flex flex-col justify-center border-l-2 border-accent pl-8 mb-24 relative">
         <div class="absolute -left-1 top-0 h-12 w-2 bg-accent"></div>
 
-        <p class="mono-label mb-4 opacity-80">// INITIALIZING_PORTFOLIO_V4.0</p>
+        <p class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-4 opacity-80">
+          // INITIALIZING_PORTFOLIO_V4.0
+        </p>
 
         <h1 class="text-6xl md:text-8xl font-semibold tracking-tight leading-[0.9] uppercase mb-6">
           Palguna <br />
@@ -152,16 +134,16 @@
 
         <div class="flex flex-wrap gap-6 text-sm font-mono">
           <a href="mailto:palgunashetty26@gmail.com" class="flex items-center gap-2 text-accent hover:underline">
-            <span class="material-symbols-outlined text-sm">alternate_email</span> EMAIL
+            EMAIL
           </a>
           <a href="https://www.linkedin.com/in/palguna-shetty-ba9924253/" class="flex items-center gap-2 text-accent hover:underline">
-            <span class="material-symbols-outlined text-sm">link</span> LINKEDIN
+            LINKEDIN
           </a>
           <a href="https://github.com/palguna26" class="flex items-center gap-2 text-accent hover:underline">
-            <span class="material-symbols-outlined text-sm">code</span> GITHUB
+            GITHUB
           </a>
           <a href="https://leetcode.com/palguna26" class="flex items-center gap-2 text-accent hover:underline">
-            <span class="material-symbols-outlined text-sm">terminal</span> LEETCODE
+            LEETCODE
           </a>
         </div>
       </section>
@@ -170,7 +152,6 @@
       <section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-28">
         <div class="md:col-span-8 p-8 card">
           <h2 class="text-2xl uppercase tracking-[0.18em] text-accent mb-6 flex items-center gap-3 font-semibold">
-            <span class="material-symbols-outlined">person_search</span>
             Summary
           </h2>
           <p class="text-lg leading-relaxed text-white/85">
@@ -179,7 +160,7 @@
         </div>
 
         <div id="education" class="md:col-span-4 p-8 card">
-          <h2 class="mono-label mb-6 opacity-70">Education</h2>
+          <h2 class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-6 opacity-70">Education</h2>
           <p class="text-lg font-semibold mb-2">JSS Science and Technology University</p>
           <p class="text-xs font-mono text-white/60 mb-4 uppercase">B.E. Computer Science // 2022–2026</p>
           <div class="flex items-baseline gap-2">
@@ -192,18 +173,15 @@
       <!-- Projects -->
       <section id="projects" class="mb-28">
         <div class="flex items-center justify-between mb-10 border-b border-accent/20 pb-4">
-          <h2 class="section-title">Featured Projects</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight uppercase">Featured Projects</h2>
           <span class="font-mono text-xs text-accent/60">[COUNT: 04]</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- RevFlo -->
           <div class="p-8 card flex flex-col min-h-[360px]">
             <div class="flex justify-between items-start mb-6">
-              <span class="material-symbols-outlined text-accent text-4xl">query_stats</span>
-              <a href="https://github.com/palguna26/revflo" class="text-accent hover:rotate-45 transition-transform">
-                <span class="material-symbols-outlined">north_east</span>
-              </a>
+              <span class="text-accent text-3xl">↗</span>
+              <a href="https://github.com/palguna26/revflo" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
             </div>
             <h3 class="text-2xl font-semibold mb-2">RevFlo</h3>
             <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">FastAPI • React • MongoDB • GitHub APIs</p>
@@ -215,13 +193,10 @@
             </div>
           </div>
 
-          <!-- PlayGround CLI -->
           <div class="p-8 card flex flex-col min-h-[360px]">
             <div class="flex justify-between items-start mb-6">
-              <span class="material-symbols-outlined text-accent text-4xl">terminal</span>
-              <a href="https://github.com/palguna26/PlayGround-CLI" class="text-accent hover:rotate-45 transition-transform">
-                <span class="material-symbols-outlined">north_east</span>
-              </a>
+              <span class="text-accent text-3xl">⌘</span>
+              <a href="https://github.com/palguna26/PlayGround-CLI" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
             </div>
             <h3 class="text-2xl font-semibold mb-2">PlayGround CLI</h3>
             <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Go • llama.cpp • Local LLMs • CLI Tooling</p>
@@ -233,13 +208,10 @@
             </div>
           </div>
 
-          <!-- EvalSmith -->
           <div class="p-8 card flex flex-col min-h-[360px]">
             <div class="flex justify-between items-start mb-6">
-              <span class="material-symbols-outlined text-accent text-4xl">rebase_edit</span>
-              <a href="https://github.com/palguna26/EvalSmith" class="text-accent hover:rotate-45 transition-transform">
-                <span class="material-symbols-outlined">north_east</span>
-              </a>
+              <span class="text-accent text-3xl">⚙</span>
+              <a href="https://github.com/palguna26/EvalSmith" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
             </div>
             <h3 class="text-2xl font-semibold mb-2">EvalSmith</h3>
             <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Python • LLM APIs • CI/CD • GitHub Actions</p>
@@ -251,13 +223,10 @@
             </div>
           </div>
 
-          <!-- SleepSensei -->
           <div class="p-8 card flex flex-col min-h-[360px]">
             <div class="flex justify-between items-start mb-6">
-              <span class="material-symbols-outlined text-accent text-4xl">bedtime</span>
-              <a href="https://github.com/palguna26/sleep_sensei_ai" class="text-accent hover:rotate-45 transition-transform">
-                <span class="material-symbols-outlined">north_east</span>
-              </a>
+              <span class="text-accent text-3xl">☾</span>
+              <a href="https://github.com/palguna26/sleep_sensei_ai" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
             </div>
             <h3 class="text-2xl font-semibold mb-2">SleepSensei</h3>
             <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Flutter • Firebase • GPT-4</p>
@@ -274,41 +243,41 @@
       <!-- Skills -->
       <section id="skills" class="mb-28 grid grid-cols-1 md:grid-cols-12 gap-10">
         <div class="md:col-span-4">
-          <h2 class="section-title mb-4">Technical Stack</h2>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight uppercase mb-4">Technical Stack</h2>
           <p class="text-white/60 text-sm mb-8">
             Tools and technologies I’m most comfortable shipping with.
           </p>
 
           <div class="space-y-4">
             <div class="p-4 card">
-              <p class="mono-label mb-2">Primary Languages</p>
+              <p class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-2">Primary Languages</p>
               <p class="font-semibold">Python / TypeScript / Go</p>
             </div>
 
             <div class="p-4 card">
-              <p class="mono-label mb-2">Frameworks</p>
+              <p class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-2">Frameworks</p>
               <p class="font-semibold">FastAPI / React / Flutter</p>
             </div>
           </div>
         </div>
 
         <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          <div class="chip">Python</div>
-          <div class="chip">TypeScript</div>
-          <div class="chip">JavaScript</div>
-          <div class="chip">Go</div>
-          <div class="chip">C++</div>
-          <div class="chip">FastAPI</div>
-          <div class="chip">React.js</div>
-          <div class="chip">Flutter</div>
-          <div class="chip">MongoDB</div>
-          <div class="chip">PostgreSQL</div>
-          <div class="chip">Docker</div>
-          <div class="chip">GitHub Actions</div>
-          <div class="chip">OpenAI API</div>
-          <div class="chip">Git</div>
-          <div class="chip">Linux</div>
-          <div class="chip">llama.cpp</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Python</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">TypeScript</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">JavaScript</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Go</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">C++</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">FastAPI</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">React.js</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Flutter</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">MongoDB</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">PostgreSQL</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Docker</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">GitHub Actions</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">OpenAI API</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Git</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Linux</div>
+          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">llama.cpp</div>
         </div>
       </section>
 
@@ -316,7 +285,7 @@
       <section class="mb-28 border-t border-accent/10 pt-14">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="flex flex-col gap-2">
-            <span class="mono-label">Competitive Coding</span>
+            <span class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent">Competitive Coding</span>
             <p class="text-xl font-semibold uppercase">250+ Problems Solved</p>
             <p class="text-white/65 text-sm">
               Consistent LeetCode practice with focus on data structures, graphs, and problem-solving under constraints.
@@ -324,7 +293,7 @@
           </div>
 
           <div class="flex flex-col gap-2">
-            <span class="mono-label">Leadership & Sports</span>
+            <span class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent">Leadership & Sports</span>
             <p class="text-xl font-semibold uppercase">Basketball Captain</p>
             <p class="text-white/65 text-sm">
               Led the CSE team to a silver medal in the inter-branch tournament, with emphasis on execution under pressure.
@@ -332,7 +301,7 @@
           </div>
 
           <div class="flex flex-col gap-2">
-            <span class="mono-label">Languages</span>
+            <span class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent">Languages</span>
             <p class="text-xl font-semibold uppercase">English / Kannada / Hindi</p>
             <p class="text-white/65 text-sm">
               Comfortable across technical communication, collaboration, and presentations.
@@ -367,7 +336,6 @@
     </footer>
   </div>
 
-  <!-- Decorative labels -->
   <div class="fixed bottom-4 left-4 font-mono text-[8px] text-accent/20 pointer-events-none hidden lg:block z-50">
     BUILD_HASH: 0x8823FB91A<br />
     STATUS: OPERATIONAL

@@ -1,348 +1,1035 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Palguna Shetty | Portfolio</title>
-
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            bg: "#000000",
-            surface: "#0d0d0d",
-            surface2: "#111111",
-            text: "#e5e7eb",
-            muted: "#9ca3af",
-            accent: "#c0ff00",
-            border: "rgba(192,255,0,0.14)"
-          }
-        }
-      }
-    };
-  </script>
+  <title>Palguna Shetty — Developer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌘</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
-    html {
-      scroll-behavior: smooth;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #060606;
+      --surface: #0e0e0e;
+      --surface2: #161616;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(192,255,0,0.5);
+      --text: #e8e8e8;
+      --muted: #666;
+      --accent: #c0ff00;
+      --accent-dim: rgba(192,255,0,0.08);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #000;
-      color: #e5e7eb;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
       overflow-x: hidden;
-      min-height: 100vh;
+      cursor: none;
     }
 
-    .blackhole-gradient {
+    /* ── Custom Cursor ── */
+    #cursor {
       position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(192,255,0,0.05) 0%, rgba(0,0,0,0) 60%);
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s var(--ease), height 0.2s var(--ease), opacity 0.2s;
+      mix-blend-mode: difference;
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(192,255,0,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease), opacity 0.3s, border-color 0.2s;
+    }
+    body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 6px; height: 6px; }
+    body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring {
+      width: 56px; height: 56px;
+      border-color: var(--accent);
     }
 
-    .scanlines {
+    /* ── Noise Overlay ── */
+    body::before {
+      content: '';
       position: fixed;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0) 50%,
-        rgba(255,255,255,0.02) 50%
-      );
-      background-size: 100% 4px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 1;
-      opacity: 0.2;
+      opacity: 0.4;
     }
 
-    .card {
-      border: 1px solid rgba(192, 255, 0, 0.14);
-      background: rgba(10, 10, 10, 0.65);
-      backdrop-filter: blur(8px);
-      transition: all 0.25s ease;
+    /* ── Radial Glow ── */
+    .glow {
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,255,0,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      transition: transform 0.8s var(--ease);
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
     }
 
-    .card:hover {
-      border-color: rgba(192, 255, 0, 0.7);
-      transform: translateY(-2px);
+    /* ── Page Wrapper ── */
+    .page { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Reveal Animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(6,6,6,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 100%;
+      height: 1px;
+      background: var(--accent);
+      transition: right 0.3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { right: 0; }
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 8px 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #000; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 80px;
+      padding-top: 120px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--accent);
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 10vw, 140px);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-desc {
+      max-width: 420px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .hero-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .hero-link {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-link:hover { color: var(--accent); }
+    .hero-link svg { transition: transform 0.2s; }
+    .hero-link:hover svg { transform: translate(2px, -2px); }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.6); }
+    }
+    .hero-scroll-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
     }
 
-    .material-symbols-outlined {
-      font-family: sans-serif;
-      font-size: 24px;
+    /* ── Section Headers ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      letter-spacing: -0.02em;
       line-height: 1;
-      display: inline-block;
-      vertical-align: middle;
     }
+    .section-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── BENTO GRID ── */
+    section { padding: 100px 0; }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 80px;
+      gap: 12px;
+    }
+
+    /* Card base */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 28px;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.35s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(192,255,0,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .card:hover::before { opacity: 1; }
+
+    /* Project cards */
+    .card-project-large { grid-column: span 7; grid-row: span 5; }
+    .card-project-medium { grid-column: span 5; grid-row: span 5; }
+    .card-project-sm-a { grid-column: span 4; grid-row: span 5; }
+    .card-project-sm-b { grid-column: span 4; grid-row: span 5; }
+    .card-project-sm-c { grid-column: span 4; grid-row: span 5; }
+
+    .project-number {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .project-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 32px);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+    .project-stack {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    .project-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #888;
+      flex: 1;
+    }
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .project-status {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .project-arrow {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+      font-size: 14px;
+    }
+    .project-arrow:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #000;
+      transform: rotate(45deg);
+    }
+    .card-inner { display: flex; flex-direction: column; height: 100%; }
+    .project-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid rgba(192,255,0,0.3);
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* ── Skills Bento ── */
+    .card-skills-main { grid-column: span 5; grid-row: span 6; }
+    .card-skills-grid { grid-column: span 7; grid-row: span 6; }
+    .card-stat-a { grid-column: span 4; grid-row: span 3; }
+    .card-stat-b { grid-column: span 4; grid-row: span 3; }
+    .card-stat-c { grid-column: span 4; grid-row: span 3; }
+
+    .skills-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .skills-heading {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.5vw, 36px);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .skills-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      height: 100%;
+      align-content: start;
+    }
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      padding: 10px 6px;
+      text-align: center;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      cursor: default;
+    }
+    .tech-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 56px);
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── About Bento ── */
+    .card-about-main { grid-column: span 8; grid-row: span 5; }
+    .card-edu { grid-column: span 4; grid-row: span 5; }
+    .card-extra-a { grid-column: span 4; grid-row: span 3; }
+    .card-extra-b { grid-column: span 4; grid-row: span 3; }
+    .card-extra-c { grid-column: span 4; grid-row: span 3; }
+
+    .about-heading {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 40px);
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+    .about-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #999;
+    }
+    .about-body strong { color: var(--text); font-weight: 600; }
+
+    .edu-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .edu-school {
+      font-family: var(--font-display);
+      font-size: 20px;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .edu-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .cgpa-display {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .cgpa-num {
+      font-family: var(--font-display);
+      font-size: 56px;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .cgpa-denom {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .extra-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .extra-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .extra-body {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      padding: 120px 0 80px;
+      text-align: center;
+    }
+    .contact-pre {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .contact-heading {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 96px);
+      letter-spacing: -0.03em;
+      line-height: 0.9;
+      margin-bottom: 48px;
+    }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-btn {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .contact-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+    .contact-btn.primary:hover { background: transparent; color: var(--accent); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .footer-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .page { padding: 0 20px; }
+      .nav-links { display: none; }
+      .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .card-project-large, .card-project-medium,
+      .card-project-sm-a, .card-project-sm-b, .card-project-sm-c,
+      .card-skills-main, .card-skills-grid,
+      .card-stat-a, .card-stat-b, .card-stat-c,
+      .card-about-main, .card-edu,
+      .card-extra-a, .card-extra-b, .card-extra-c {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .card { padding: 24px; min-height: 220px; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 28px; }
+      .hero-scroll { display: none; }
+      .contact-links { flex-direction: column; align-items: center; }
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+      .tech-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── Line clamp utility ── */
+    .clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
 </head>
 
-<body class="selection:bg-accent selection:text-black">
-  <div class="blackhole-gradient"></div>
-  <div class="scanlines"></div>
+<body>
+  <!-- Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
 
-  <div class="relative z-10">
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-accent/10 bg-black/80 backdrop-blur-xl">
-      <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="text-accent text-xl">⌘</span>
-          <span class="text-lg md:text-xl font-semibold tracking-tight text-accent">
-            Palguna_DEV
-          </span>
-        </div>
+  <!-- Glow -->
+  <div class="glow" id="glow"></div>
 
-        <div class="hidden md:flex gap-8">
-          <a href="#hero" class="uppercase tracking-[0.2em] text-xs text-accent border-b border-accent">Home</a>
-          <a href="#projects" class="uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors">Projects</a>
-          <a href="#skills" class="uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors">Stack</a>
-          <a href="#education" class="uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors">Bio</a>
-        </div>
+  <!-- Nav -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">⌘ PALGUNA</a>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Stack</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://drive.google.com/file/d/1J643ne5OxFxeV-8hBZR3eoAWytcIRAkY/view?usp=sharing" target="_blank" class="nav-cta">Resume</a>
+    </div>
+  </nav>
 
-        <a
-          href="https://drive.google.com/file/d/1J643ne5OxFxeV-8hBZR3eoAWytcIRAkY/view?usp=sharing"
-          class="border border-accent px-4 py-2 text-xs uppercase tracking-[0.2em] text-accent hover:bg-accent hover:text-black transition-all"
-        >
-          Resume
-        </a>
+  <!-- Hero -->
+  <div class="page">
+    <section id="hero">
+      <div class="reveal" style="transition-delay: 0.1s">
+        <div class="hero-eyebrow">Full-Stack Developer & AI Builder</div>
       </div>
-    </nav>
-
-    <main class="pt-28 px-6 md:px-12 max-w-7xl mx-auto">
-      <!-- Hero -->
-      <section id="hero" class="min-h-[72vh] flex flex-col justify-center border-l-2 border-accent pl-8 mb-24 relative">
-        <div class="absolute -left-1 top-0 h-12 w-2 bg-accent"></div>
-
-        <p class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-4 opacity-80">
-          // INITIALIZING_PORTFOLIO_V4.0
-        </p>
-
-        <h1 class="text-6xl md:text-8xl font-semibold tracking-tight leading-[0.9] uppercase mb-6">
-          Palguna <br />
-          <span class="text-accent">Shetty</span>
+      <div class="reveal" style="transition-delay: 0.25s">
+        <h1 class="hero-name">
+          Palguna<br/>
+          <em>Shetty</em>
         </h1>
-
-        <p class="text-lg md:text-2xl max-w-2xl text-white/70 leading-relaxed mb-10">
-          Building AI-native products, backend systems, and developer tools with a focus on speed, clarity, and practical impact.
+      </div>
+      <div class="hero-bottom reveal" style="transition-delay: 0.4s">
+        <p class="hero-desc">
+          Final-year CS student at JSSTU, Mysuru. I build backend systems, full-stack apps, and AI-powered developer tools. Fast iteration, high ownership, practical impact.
         </p>
-
-        <div class="flex flex-wrap gap-6 text-sm font-mono">
-          <a href="mailto:palgunashetty26@gmail.com" class="flex items-center gap-2 text-accent hover:underline">
-            EMAIL
+        <div class="hero-links">
+          <a href="mailto:palgunashetty26@gmail.com" class="hero-link">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 3L6 7L11 3M1 10H11V2H1V10Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            Email
           </a>
-          <a href="https://www.linkedin.com/in/palguna-shetty-ba9924253/" class="flex items-center gap-2 text-accent hover:underline">
-            LINKEDIN
+          <a href="https://www.linkedin.com/in/palguna-shetty-ba9924253/" target="_blank" class="hero-link">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4H1V11H2.5V4ZM1.75 3.25C2.3 3.25 2.75 2.8 2.75 2.25S2.3 1.25 1.75 1.25 .75 1.7.75 2.25 1.2 3.25 1.75 3.25ZM11 11H9.5V7.5C9.5 6.7 8.85 6 8 6S6.5 6.7 6.5 7.5V11H5V4H6.5V4.8C6.9 4.3 7.6 4 8.25 4 9.8 4 11 5.2 11 6.75V11Z"/></svg>
+            LinkedIn
           </a>
-          <a href="https://github.com/palguna26" class="flex items-center gap-2 text-accent hover:underline">
-            GITHUB
+          <a href="https://github.com/palguna26" target="_blank" class="hero-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.09.682-.218.682-.484 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
           </a>
-          <a href="https://leetcode.com/palguna26" class="flex items-center gap-2 text-accent hover:underline">
-            LEETCODE
+          <a href="https://leetcode.com/palguna26" target="_blank" class="hero-link">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 6H8.5M6 3.5V8.5" stroke="currentColor" stroke-width="1.2"/></svg>
+            LeetCode
           </a>
         </div>
-      </section>
-
-      <!-- Summary + Education -->
-      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-28">
-        <div class="md:col-span-8 p-8 card">
-          <h2 class="text-2xl uppercase tracking-[0.18em] text-accent mb-6 flex items-center gap-3 font-semibold">
-            Summary
-          </h2>
-          <p class="text-lg leading-relaxed text-white/85">
-            Final-year Computer Science student at JSSTU, Mysuru. I build backend systems, full-stack web apps, and AI-powered developer tools. Interested in startups, fast iteration, and products where engineering quality actually matters.
-          </p>
-        </div>
-
-        <div id="education" class="md:col-span-4 p-8 card">
-          <h2 class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-6 opacity-70">Education</h2>
-          <p class="text-lg font-semibold mb-2">JSS Science and Technology University</p>
-          <p class="text-xs font-mono text-white/60 mb-4 uppercase">B.E. Computer Science // 2022–2026</p>
-          <div class="flex items-baseline gap-2">
-            <span class="text-3xl font-semibold text-accent">8.63</span>
-            <span class="text-sm font-mono text-white/40">/ 10 CGPA</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Projects -->
-      <section id="projects" class="mb-28">
-        <div class="flex items-center justify-between mb-10 border-b border-accent/20 pb-4">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight uppercase">Featured Projects</h2>
-          <span class="font-mono text-xs text-accent/60">[COUNT: 04]</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div class="p-8 card flex flex-col min-h-[360px]">
-            <div class="flex justify-between items-start mb-6">
-              <span class="text-accent text-3xl">↗</span>
-              <a href="https://github.com/palguna26/revflo" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2">RevFlo</h3>
-            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">FastAPI • React • MongoDB • GitHub APIs</p>
-            <p class="text-white/70 text-sm leading-relaxed mb-auto">
-              Code review and repository analysis tool that inspects GitHub repos and pull requests for security issues, maintainability, and code quality with real-time webhook triggers.
-            </p>
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <p class="text-[10px] font-mono text-white/35">STABLE_RELEASE // revflo-front.vercel.app</p>
-            </div>
-          </div>
-
-          <div class="p-8 card flex flex-col min-h-[360px]">
-            <div class="flex justify-between items-start mb-6">
-              <span class="text-accent text-3xl">⌘</span>
-              <a href="https://github.com/palguna26/PlayGround-CLI" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2">PlayGround CLI</h3>
-            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Go • llama.cpp • Local LLMs • CLI Tooling</p>
-            <p class="text-white/70 text-sm leading-relaxed mb-auto">
-              Local-first AI coding assistant for the terminal with safety guarantees. Runs offline, supports interactive agent workflows, resumable sessions, and explicit diff-based approval before applying code changes.
-            </p>
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <p class="text-[10px] font-mono text-white/35">OPEN_SOURCE // LOCAL_FIRST_AI_AGENT</p>
-            </div>
-          </div>
-
-          <div class="p-8 card flex flex-col min-h-[360px]">
-            <div class="flex justify-between items-start mb-6">
-              <span class="text-accent text-3xl">⚙</span>
-              <a href="https://github.com/palguna26/EvalSmith" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2">EvalSmith</h3>
-            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Python • LLM APIs • CI/CD • GitHub Actions</p>
-            <p class="text-white/70 text-sm leading-relaxed mb-auto">
-              LLM prompt regression testing CLI for validating prompt behavior across OpenAI, Anthropic, and Google models with CI/CD gating support.
-            </p>
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <p class="text-[10px] font-mono text-white/35">OPEN_SOURCE // GITHUB_REPOSITORY</p>
-            </div>
-          </div>
-
-          <div class="p-8 card flex flex-col min-h-[360px]">
-            <div class="flex justify-between items-start mb-6">
-              <span class="text-accent text-3xl">☾</span>
-              <a href="https://github.com/palguna26/sleep_sensei_ai" class="text-accent hover:rotate-45 transition-transform text-xl">↗</a>
-            </div>
-            <h3 class="text-2xl font-semibold mb-2">SleepSensei</h3>
-            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Flutter • Firebase • GPT-4</p>
-            <p class="text-white/70 text-sm leading-relaxed mb-auto">
-              AI sleep coaching app with accelerometer-based sleep detection and personalized coaching insights for better sleep hygiene.
-            </p>
-            <div class="mt-8 pt-6 border-t border-white/10">
-              <p class="text-[10px] font-mono text-white/35">BETA_VERSION // CROSS_PLATFORM</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Skills -->
-      <section id="skills" class="mb-28 grid grid-cols-1 md:grid-cols-12 gap-10">
-        <div class="md:col-span-4">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight uppercase mb-4">Technical Stack</h2>
-          <p class="text-white/60 text-sm mb-8">
-            Tools and technologies I’m most comfortable shipping with.
-          </p>
-
-          <div class="space-y-4">
-            <div class="p-4 card">
-              <p class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-2">Primary Languages</p>
-              <p class="font-semibold">Python / TypeScript / Go</p>
-            </div>
-
-            <div class="p-4 card">
-              <p class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent mb-2">Frameworks</p>
-              <p class="font-semibold">FastAPI / React / Flutter</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Python</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">TypeScript</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">JavaScript</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Go</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">C++</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">FastAPI</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">React.js</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Flutter</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">MongoDB</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">PostgreSQL</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Docker</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">GitHub Actions</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">OpenAI API</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Git</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">Linux</div>
-          <div class="p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors">llama.cpp</div>
-        </div>
-      </section>
-
-      <!-- Extras -->
-      <section class="mb-28 border-t border-accent/10 pt-14">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="flex flex-col gap-2">
-            <span class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent">Competitive Coding</span>
-            <p class="text-xl font-semibold uppercase">250+ Problems Solved</p>
-            <p class="text-white/65 text-sm">
-              Consistent LeetCode practice with focus on data structures, graphs, and problem-solving under constraints.
-            </p>
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <span class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent">Leadership & Sports</span>
-            <p class="text-xl font-semibold uppercase">Basketball Captain</p>
-            <p class="text-white/65 text-sm">
-              Led the CSE team to a silver medal in the inter-branch tournament, with emphasis on execution under pressure.
-            </p>
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <span class="text-[11px] uppercase tracking-[0.25em] font-mono text-accent">Languages</span>
-            <p class="text-xl font-semibold uppercase">English / Kannada / Hindi</p>
-            <p class="text-white/65 text-sm">
-              Comfortable across technical communication, collaboration, and presentations.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-accent/10 bg-black/90 py-10 px-6">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-        <div>
-          <span class="text-accent font-semibold uppercase tracking-[0.18em] text-lg">Palguna</span>
-          <p class="text-[10px] uppercase text-white/40 mt-2 tracking-[0.18em]">
-            © 2026 PALGUNA SHETTY
-          </p>
-        </div>
-
-        <div class="flex gap-6 flex-wrap justify-center">
-          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="mailto:palgunashetty26@gmail.com">Email</a>
-          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="https://linkedin.com/in/palguna-shetty-ba9924253/">LinkedIn</a>
-          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="https://github.com/palguna26">GitHub</a>
-          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="https://leetcode.com/palguna26">LeetCode</a>
-        </div>
-
-        <div class="text-right">
-          <p class="font-mono text-[10px] text-accent">BASED IN KARNATAKA, INDIA</p>
-          <p class="font-mono text-[10px] text-white/20">BUILDING AI + DEV TOOLS</p>
+        <div class="hero-scroll">
+          <div class="hero-scroll-line"></div>
+          <span class="hero-scroll-label">Scroll</span>
         </div>
       </div>
-    </footer>
+    </section>
   </div>
 
-  <div class="fixed bottom-4 left-4 font-mono text-[8px] text-accent/20 pointer-events-none hidden lg:block z-50">
-    BUILD_HASH: 0x8823FB91A<br />
-    STATUS: OPERATIONAL
+  <hr class="divider" />
+
+  <!-- Projects -->
+  <div class="page">
+    <section id="projects">
+      <div class="section-header reveal">
+        <h2 class="section-title">Projects</h2>
+        <span class="section-count">04 works</span>
+      </div>
+
+      <div class="bento">
+        <!-- Large card: RevFlo -->
+        <div class="card card-project-large reveal" style="transition-delay:0.05s">
+          <div class="card-inner">
+            <div>
+              <div class="project-number">01 — FEATURED</div>
+              <span class="project-tag">AI Product</span>
+              <h3 class="project-title">RevFlo</h3>
+              <p class="project-stack">FastAPI &nbsp;·&nbsp; React &nbsp;·&nbsp; MongoDB &nbsp;·&nbsp; GitHub APIs</p>
+              <p class="project-desc">
+                Code review and repository analysis platform that inspects GitHub repos and pull requests for security vulnerabilities, maintainability issues, and code quality regressions — with real-time webhook triggers and AI-powered summaries.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status">Stable Release &nbsp;·&nbsp; revflo-front.vercel.app</span>
+              <a href="https://github.com/palguna26/revflo" target="_blank" class="project-arrow">↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Medium card: PlayGround CLI -->
+        <div class="card card-project-medium reveal" style="transition-delay:0.1s">
+          <div class="card-inner">
+            <div>
+              <div class="project-number">02</div>
+              <span class="project-tag">Developer Tool</span>
+              <h3 class="project-title">PlayGround CLI</h3>
+              <p class="project-stack">Go &nbsp;·&nbsp; llama.cpp &nbsp;·&nbsp; Local LLMs</p>
+              <p class="project-desc clamp-3">
+                Local-first AI coding assistant for the terminal. Runs fully offline, supports interactive agent workflows, resumable sessions, and explicit diff-based approval before applying changes.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status">Open Source &nbsp;·&nbsp; Local-first</span>
+              <a href="https://github.com/palguna26/PlayGround-CLI" target="_blank" class="project-arrow">↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Three small cards -->
+        <div class="card card-project-sm-a reveal" style="transition-delay:0.15s">
+          <div class="card-inner">
+            <div>
+              <div class="project-number">03</div>
+              <span class="project-tag">CLI / OSS</span>
+              <h3 class="project-title">EvalSmith</h3>
+              <p class="project-stack">Python &nbsp;·&nbsp; LLM APIs &nbsp;·&nbsp; CI/CD</p>
+              <p class="project-desc clamp-3">
+                LLM prompt regression testing CLI. Validates prompt behavior across OpenAI, Anthropic, and Google models with CI/CD gating and accuracy scoring.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status">MIT License</span>
+              <a href="https://github.com/palguna26/EvalSmith" target="_blank" class="project-arrow">↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-project-sm-b reveal" style="transition-delay:0.2s">
+          <div class="card-inner">
+            <div>
+              <div class="project-number">04</div>
+              <span class="project-tag">Mobile / AI</span>
+              <h3 class="project-title">SleepSensei</h3>
+              <p class="project-stack">Flutter &nbsp;·&nbsp; Firebase &nbsp;·&nbsp; GPT-4</p>
+              <p class="project-desc clamp-3">
+                AI sleep coaching app with accelerometer-based sleep detection and personalized coaching insights for better sleep hygiene.
+              </p>
+            </div>
+            <div class="project-footer">
+              <span class="project-status">Beta &nbsp;·&nbsp; Cross-platform</span>
+              <a href="https://github.com/palguna26/sleep_sensei_ai" target="_blank" class="project-arrow">↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-project-sm-c reveal" style="transition-delay:0.25s" style="background: var(--accent-dim); border-color: rgba(192,255,0,0.2);">
+          <div class="card-inner" style="justify-content: space-between; height: 100%;">
+            <div>
+              <div class="project-number" style="color: var(--muted);">Next</div>
+              <h3 class="project-title" style="color: var(--accent);">Building<br/><em style="font-style:italic">in public</em></h3>
+            </div>
+            <p class="project-desc" style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">
+              Exploring causal simulation layers for AI agents. More soon.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div class="fixed top-24 right-4 font-mono text-[8px] text-accent/20 pointer-events-none hidden lg:block origin-right rotate-90 z-50">
-    SYSTEM_UPTIME: 99.9%
+  <hr class="divider" />
+
+  <!-- Skills -->
+  <div class="page">
+    <section id="skills">
+      <div class="section-header reveal">
+        <h2 class="section-title">Technical Stack</h2>
+        <span class="section-count">16 tools</span>
+      </div>
+
+      <div class="bento">
+        <!-- Main desc -->
+        <div class="card card-skills-main reveal" style="transition-delay:0.05s">
+          <div class="card-inner" style="height:100%; justify-content: space-between;">
+            <div>
+              <p class="skills-label">What I ship with</p>
+              <h3 class="skills-heading">Speed, clarity, and the right tool for the job.</h3>
+              <p class="skills-body" style="margin-top: 16px;">
+                My primary languages are <strong>Python</strong>, <strong>TypeScript</strong>, and <strong>Go</strong>. I build backends with FastAPI, full-stack apps with React, and mobile apps with Flutter. Everything runs in Docker, deploys via CI/CD, and talks to at least one LLM.
+              </p>
+            </div>
+            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);">
+              <p class="skills-label" style="margin-bottom: 8px;">Primary Languages</p>
+              <p style="font-family: var(--font-display); font-size: 22px; letter-spacing:-0.01em;">Python &nbsp;/&nbsp; TypeScript &nbsp;/&nbsp; Go</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech grid -->
+        <div class="card card-skills-grid reveal" style="transition-delay:0.1s">
+          <div class="tech-grid">
+            <div class="tech-pill">Python</div>
+            <div class="tech-pill">TypeScript</div>
+            <div class="tech-pill">JavaScript</div>
+            <div class="tech-pill">Go</div>
+            <div class="tech-pill">C++</div>
+            <div class="tech-pill">FastAPI</div>
+            <div class="tech-pill">React.js</div>
+            <div class="tech-pill">Flutter</div>
+            <div class="tech-pill">MongoDB</div>
+            <div class="tech-pill">PostgreSQL</div>
+            <div class="tech-pill">Docker</div>
+            <div class="tech-pill">GH Actions</div>
+            <div class="tech-pill">OpenAI API</div>
+            <div class="tech-pill">Git</div>
+            <div class="tech-pill">Linux</div>
+            <div class="tech-pill">llama.cpp</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="card card-stat-a reveal" style="transition-delay:0.15s">
+          <p class="stat-number">250+</p>
+          <p class="stat-label">LeetCode Problems</p>
+        </div>
+        <div class="card card-stat-b reveal" style="transition-delay:0.2s">
+          <p class="stat-number">4</p>
+          <p class="stat-label">Shipped Projects</p>
+        </div>
+        <div class="card card-stat-c reveal" style="transition-delay:0.25s">
+          <p class="stat-number">8.63</p>
+          <p class="stat-label">CGPA / 10</p>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <hr class="divider" />
+
+  <!-- About -->
+  <div class="page">
+    <section id="about">
+      <div class="section-header reveal">
+        <h2 class="section-title">About</h2>
+        <span class="section-count">Background</span>
+      </div>
+
+      <div class="bento">
+        <!-- About text -->
+        <div class="card card-about-main reveal" style="transition-delay:0.05s">
+          <div class="card-inner" style="height:100%;">
+            <h3 class="about-heading">Building things end-to-end, shipping fast.</h3>
+            <p class="about-body" style="margin-top: 20px;">
+              I'm a final-year <strong>Computer Science and Engineering</strong> student at JSS Science and Technology University, Mysuru. I gravitate toward <strong>developer tools</strong> and <strong>AI-powered applications</strong> where engineering quality actually has visible impact.
+            </p>
+            <p class="about-body" style="margin-top: 16px;">
+              Outside code I led my department's basketball team to a silver medal. I believe execution under pressure is a skill that transfers, and I bring that same ownership-oriented approach to every project I work on.
+            </p>
+            <p class="about-body" style="margin-top: 16px;">
+              Languages: <strong>English, Kannada, Hindi.</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="card card-edu reveal" style="transition-delay:0.1s">
+          <div class="card-inner" style="height:100%;">
+            <p class="edu-label">Education</p>
+            <h4 class="edu-school">JSS Science and Technology University</h4>
+            <p class="edu-meta">B.E. Computer Science &nbsp;·&nbsp; 2022 – 2026</p>
+            <div style="flex:1;"></div>
+            <div class="cgpa-display">
+              <span class="cgpa-num">8.63</span>
+              <span class="cgpa-denom">/ 10 CGPA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extras -->
+        <div class="card card-extra-a reveal" style="transition-delay:0.15s">
+          <span class="extra-icon">⌘</span>
+          <h4 class="extra-title">AI Builder</h4>
+          <p class="extra-body">Focused on developer tools and AI-native products. Fast iteration, high ownership.</p>
+        </div>
+        <div class="card card-extra-b reveal" style="transition-delay:0.2s">
+          <span class="extra-icon">🏀</span>
+          <h4 class="extra-title">Basketball Captain</h4>
+          <p class="extra-body">Led CSE team to silver in inter-branch tournament. Execution under pressure.</p>
+        </div>
+        <div class="card card-extra-c reveal" style="transition-delay:0.25s">
+          <span class="extra-icon">◎</span>
+          <h4 class="extra-title">Open Source</h4>
+          <p class="extra-body">EvalSmith is MIT-licensed and publicly maintained. More projects shipping soon.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Contact -->
+  <div class="page">
+    <section id="contact" class="contact-section reveal">
+      <p class="contact-pre">Let's work together</p>
+      <h2 class="contact-heading">Get in<br/><em>touch.</em></h2>
+      <div class="contact-links">
+        <a href="mailto:palgunashetty26@gmail.com" class="contact-btn primary">Send an Email</a>
+        <a href="https://www.linkedin.com/in/palguna-shetty-ba9924253/" target="_blank" class="contact-btn">LinkedIn</a>
+        <a href="https://github.com/palguna26" target="_blank" class="contact-btn">GitHub</a>
+        <a href="https://drive.google.com/file/d/1J643ne5OxFxeV-8hBZR3eoAWytcIRAkY/view?usp=sharing" target="_blank" class="contact-btn">Resume</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Palguna Shetty. Built from scratch.</span>
+      <div class="footer-status">
+        <div class="status-dot"></div>
+        Available for opportunities
+      </div>
+      <span class="footer-copy">Karnataka, India</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── Cursor ──
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animRing() {
+      rx += (mx - rx) * 0.14;
+      ry += (my - ry) * 0.14;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+
+    // ── Nav scroll ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Card glow on mousemove ──
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+        const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+        card.style.setProperty('--mx', x + '%');
+        card.style.setProperty('--my', y + '%');
+      });
+    });
+
+    // ── Reveal on scroll ──
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Trigger hero reveals immediately
+    setTimeout(() => {
+      document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+    }, 80);
+  </script>
 </body>
 </html>

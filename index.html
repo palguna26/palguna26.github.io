@@ -1,372 +1,380 @@
 <!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palguna Shetty | Portfolio</title>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Palguna_DEV // SYSTEM_OPERATOR</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "on-primary-container": "#516e00",
-                        "tertiary-fixed": "#d5e9bf",
-                        "on-tertiary-container": "#586a48",
-                        "tertiary-fixed-dim": "#b9cda4",
-                        "surface-container-lowest": "#050505",
-                        "secondary-container": "#587700",
-                        "on-primary": "#263500",
-                        "surface-container": "#111111",
-                        "on-surface-variant": "#c3caac",
-                        "on-primary-fixed": "#141f00",
-                        "surface-container-highest": "#1a1a1a",
-                        "surface-bright": "#222222",
-                        "on-secondary-fixed": "#141f00",
-                        "surface-dim": "#080808",
-                        "surface-container-low": "#0c0c0c",
-                        "error-container": "#93000a",
-                        "on-background": "#e5e2e1",
-                        primary: "#ffffff",
-                        "on-primary-fixed-variant": "#384e00",
-                        "on-secondary": "#263500",
-                        "inverse-on-surface": "#313030",
-                        "surface-tint": "#c0ff00",
-                        "on-secondary-fixed-variant": "#384e00",
-                        "primary-fixed": "#c0ff00",
-                        "on-error-container": "#ffdad6",
-                        error: "#ffb4ab",
-                        "surface-variant": "#1a1a1a",
-                        "surface-container-high": "#151515",
-                        "tertiary-container": "#d5e9bf",
-                        "secondary-fixed": "#caf076",
-                        "inverse-surface": "#e5e2e1",
-                        background: "#000000",
-                        "primary-container": "#c0ff00",
-                        "on-error": "#690005",
-                        "on-tertiary-fixed": "#111f06",
-                        "on-surface": "#e5e2e1",
-                        "on-secondary-container": "#d7fe82",
-                        "outline-variant": "#434933",
-                        "inverse-primary": "#4c6700",
-                        tertiary: "#ffffff",
-                        "secondary-fixed-dim": "#afd35d",
-                        secondary: "#afd35d",
-                        "on-tertiary": "#253518",
-                        outline: "#8d9479",
-                        "primary-fixed-dim": "#c0ff00",
-                        "on-tertiary-fixed-variant": "#3b4c2d",
-                        surface: "#000000"
-                    },
-                    fontFamily: {
-                        headline: ["Space Grotesk"],
-                        body: ["Inter"],
-                        label: ["Space Grotesk"],
-                        mono: ["Space Mono"],
-                        display: "Space Grotesk"
-                    },
-                    borderRadius: {
-                        DEFAULT: "0px",
-                        lg: "0px",
-                        xl: "0px",
-                        full: "0px"
-                    }
-                }
-            }
-        };
-    </script>
-<style>
-        body {
-            background-color: #000000;
-            scroll-behavior: smooth;
-            position: relative;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        /* Blackhole Singularity Glow */
-        .blackhole-gradient {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150vw;
-            height: 150vh;
-            background: radial-gradient(circle at center, rgba(192, 255, 0, 0.03) 0%, rgba(10, 10, 10, 0) 60%);
-            pointer-events: none;
-            z-index: 0;
-        }
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+  />
 
-        /* Cosmic Dust / Grain */
-        .grain-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.04;
-            background: url('https://grainy-gradients.vercel.app/noise.svg');
-            animation: grain 8s steps(10) infinite;
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            bg: "#000000",
+            surface: "#0d0d0d",
+            surface2: "#111111",
+            text: "#e5e7eb",
+            muted: "#9ca3af",
+            accent: "#c0ff00",
+            border: "rgba(192,255,0,0.14)"
+          }
         }
+      }
+    };
+  </script>
 
-        @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-5%, -5%); }
-            20% { transform: translate(-10%, 5%); }
-            30% { transform: translate(5%, -10%); }
-            40% { transform: translate(-5%, 15%); }
-            50% { transform: translate(-10%, 5%); }
-            60% { transform: translate(15%, 0); }
-            70% { transform: translate(0, 10%); }
-            80% { transform: translate(-15%, 0); }
-            90% { transform: translate(10%, 5%); }
-        }
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .material-symbols-outlined {
-            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
-        }
+    body {
+      background: #000;
+      color: #e5e7eb;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
 
-        .technical-border {
-            border: 1px solid rgba(192, 255, 0, 0.15);
-            background-color: rgba(10, 10, 10, 0.4);
-            backdrop-filter: blur(4px);
-        }
+    .blackhole-gradient {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(192,255,0,0.05) 0%, rgba(0,0,0,0) 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .technical-border:hover {
-            border: 1px solid rgba(192, 255, 0, 0.8);
-            background-color: rgba(10, 10, 10, 0.6);
-        }
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 50%,
+        rgba(255,255,255,0.02) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.2;
+    }
 
-        /* Scanline effect for added terminal feel */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(18, 16, 16, 0) 50%,
-                rgba(0, 0, 0, 0.05) 50%
-            );
-            background-size: 100% 4px;
-            z-index: 2;
-            pointer-events: none;
-        }
-    </style>
+    .card {
+      border: 1px solid rgba(192, 255, 0, 0.14);
+      background: rgba(10, 10, 10, 0.65);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(192, 255, 0, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .nav-link {
+      @apply uppercase tracking-[0.2em] text-xs text-white/60 hover:text-accent transition-colors;
+    }
+
+    .nav-link-active {
+      @apply text-accent border-b border-accent;
+    }
+
+    .chip {
+      @apply p-4 border border-white/10 text-center text-sm font-mono hover:bg-accent hover:text-black transition-colors;
+    }
+
+    .section-title {
+      @apply text-3xl md:text-4xl font-semibold tracking-tight uppercase;
+    }
+
+    .mono-label {
+      @apply text-[11px] uppercase tracking-[0.25em] font-mono text-accent;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+  </style>
 </head>
-<body class="font-body text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
-<div class="blackhole-gradient"></div>
-<div class="grain-overlay"></div>
-<div class="scanlines"></div>
-<!-- Content Wrapper -->
-<div class="relative z-10">
-<!-- TopAppBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#000000]/80 backdrop-blur-xl border-b border-[#c0ff00]/10 flex justify-between items-center px-6 py-4 max-w-full">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[#c0ff00]" data-icon="terminal">terminal</span>
-<span class="text-xl font-bold text-[#c0ff00] tracking-tighter font-headline">Palguna_DEV</span>
-</div>
-<div class="hidden md:flex gap-8">
-<a class="font-headline uppercase tracking-widest text-sm text-[#c0ff00] border-b border-[#c0ff00] hover:bg-[#c0ff00]/5 transition-colors" href="#hero">HOME</a>
-<a class="font-headline uppercase tracking-widest text-sm text-white/60 hover:text-[#c0ff00] hover:bg-[#c0ff00]/5 transition-colors" href="#projects">PROJECTS</a>
-<a class="font-headline uppercase tracking-widest text-sm text-white/60 hover:text-[#c0ff00] hover:bg-[#c0ff00]/5 transition-colors" href="#skills">STACK</a>
-<a class="font-headline uppercase tracking-widest text-sm text-white/60 hover:text-[#c0ff00] hover:bg-[#c0ff00]/5 transition-colors" href="#education">BIO</a>
-</div>
-<a class="font-headline uppercase tracking-widest text-sm text-[#c0ff00] border border-[#c0ff00] px-4 py-1 hover:bg-[#c0ff00] hover:text-[#000000] transition-all" href="https://drive.google.com/file/d/1J643ne5OxFxeV-8hBZR3eoAWytcIRAkY/view?usp=sharing">RESUME_PDF</a>
-</nav>
-<main class="pt-24 px-6 md:px-12 max-w-7xl mx-auto">
-<!-- Hero Section -->
-<section class="min-h-[70vh] flex flex-col justify-center border-l-2 border-primary-fixed pl-8 mb-24 relative" id="hero">
-<div class="absolute -left-1 top-0 h-12 w-2 bg-primary-fixed"></div>
-<p class="font-mono text-primary-fixed mb-4 text-sm tracking-widest uppercase opacity-80">// INITIALIZING_PORTFOLIO_V4.0</p>
-<h1 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter mb-6 text-white uppercase leading-[0.9]">
-                    Palguna <br/> <span class="text-primary-fixed">Shetty</span>
-</h1>
-<p class="text-xl md:text-2xl font-body max-w-2xl text-on-surface-variant mb-10 leading-relaxed">
-                    Building AI-native products and developer tools. Architecting systems that bridge the gap between heavy logic and seamless UX.
-                </p>
-<div class="flex flex-wrap gap-6 font-mono text-sm">
-<a class="flex items-center gap-2 text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4" href="mailto:palgunashetty26@gmail.com">
-<span class="material-symbols-outlined text-sm" data-icon="alternate_email">alternate_email</span> EMAIL
-                    </a>
-<a class="flex items-center gap-2 text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4" href="https://www.linkedin.com/in/palguna-shetty-ba9924253/">
-<span class="material-symbols-outlined text-sm" data-icon="link">link</span> LINKEDIN
-                    </a>
-<a class="flex items-center gap-2 text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4" href="https://github.com/palguna26">
-<span class="material-symbols-outlined text-sm" data-icon="code">code</span> GITHUB
-                    </a>
-<a class="flex items-center gap-2 text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4" href="https://leetcode.com/palguna26">
-<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span> LEETCODE
-                    </a>
-</div>
-</section>
-<!-- Summary & Education -->
-<section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32">
-<div class="md:col-span-8 p-8 technical-border">
-<h2 class="font-headline text-2xl uppercase tracking-widest text-primary-fixed mb-6 flex items-center gap-3">
-<span class="material-symbols-outlined" data-icon="person_search">person_search</span> Summary
-                    </h2>
-<p class="text-lg leading-relaxed text-on-surface">
-                        Final-year CS student at JSSTU, Mysuru. I build backend systems, full-stack web apps, and AI-powered tools — fast. Interested in startups that move at the speed of thought. My focus lies in reducing latency, maximizing prompt efficiency, and developer experience.
-                    </p>
-</div>
-<div class="md:col-span-4 p-8 technical-border" id="education">
-<h2 class="font-headline text-sm uppercase tracking-widest text-primary-fixed mb-6 opacity-60">Education</h2>
-<p class="font-headline text-lg font-bold mb-2">JSS Science and Technology University</p>
-<p class="font-mono text-xs text-on-surface-variant mb-4 uppercase">B.E. Computer Science // 2022–2026</p>
-<div class="flex items-baseline gap-2">
-<span class="text-3xl font-headline font-bold text-primary-fixed">8.63</span>
-<span class="text-sm font-mono opacity-50">/ 10 CGPA</span>
-</div>
-</div>
-</section>
-<!-- Projects Section -->
-<section class="mb-32" id="projects">
-<div class="flex items-center justify-between mb-12 border-b border-primary-fixed/20 pb-4">
-<h2 class="font-headline text-4xl font-bold uppercase tracking-tight">Featured_Projects</h2>
-<span class="font-mono text-xs text-primary-fixed opacity-50">[COUNT: 03]</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-1">
-<!-- Project 1 -->
-<div class="p-8 technical-border flex flex-col min-h-[400px]">
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-primary-fixed text-4xl" data-icon="query_stats">query_stats</span>
-<a class="text-primary-fixed hover:rotate-45 transition-transform" href="https://github.com/palguna26/revflo">
-<span class="material-symbols-outlined" data-icon="north_east">north_east</span>
-</a>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-2">RevFlo</h3>
-<p class="font-mono text-[10px] text-secondary mb-4 uppercase tracking-widest">FastAPI • React.js • MongoDB • GitHub APIs</p>
-<p class="text-on-surface-variant text-sm leading-relaxed mb-auto">
-                            Code Review &amp; Repo Analysis Tool. Analyzes GitHub repos and PRs for security issues and code quality. Triggers via webhooks for real-time feedback.
-                        </p>
-<div class="mt-8 pt-6 border-t border-white/10">
-<p class="text-[10px] font-mono opacity-40">STABLE_RELEASE // revflo-front.vercel.app</p>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="p-8 technical-border flex flex-col min-h-[400px]">
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-primary-fixed text-4xl" data-icon="rebase_edit">rebase_edit</span>
-<a class="text-primary-fixed hover:rotate-45 transition-transform" href="https://github.com/palguna26/EvalSmith">
-<span class="material-symbols-outlined" data-icon="north_east">north_east</span>
-</a>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-2">EvalSmith</h3>
-<p class="font-mono text-[10px] text-secondary mb-4 uppercase tracking-widest">Python • LLM APIs • CI/CD • Actions</p>
-<p class="text-on-surface-variant text-sm leading-relaxed mb-auto">
-                            LLM Prompt Regression Testing CLI. Automated prompt testing across OpenAI, Anthropic, and Google models. CI/CD gating via GitHub Actions.
-                        </p>
-<div class="mt-8 pt-6 border-t border-white/10">
-<p class="text-[10px] font-mono opacity-40">OPEN_SOURCE // GITHUB_REPOSITORY</p>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="p-8 technical-border flex flex-col min-h-[400px]">
-<div class="flex justify-between items-start mb-6">
-<span class="material-symbols-outlined text-primary-fixed text-4xl" data-icon="bedtime">bedtime</span>
-<a class="text-primary-fixed hover:rotate-45 transition-transform" href="https://github.com/palguna26/sleep_sensei_ai">
-<span class="material-symbols-outlined" data-icon="north_east">north_east</span>
-</a>
-</div>
-<h3 class="font-headline text-2xl font-bold mb-2">SleepSensei</h3>
-<p class="font-mono text-[10px] text-secondary mb-4 uppercase tracking-widest">Flutter • Firebase • GPT-4</p>
-<p class="text-on-surface-variant text-sm leading-relaxed mb-auto">
-                            AI Sleep Coaching App. Cross-platform mobile app with accelerometer-based sleep detection and GPT-4 coaching insights for sleep hygiene.
-                        </p>
-<div class="mt-8 pt-6 border-t border-white/10">
-<p class="text-[10px] font-mono opacity-40">BETA_VERSION // CROSS_PLATFORM</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Skills Section -->
-<section class="mb-32 grid grid-cols-1 md:grid-cols-12 gap-12" id="skills">
-<div class="md:col-span-4">
-<h2 class="font-headline text-3xl font-bold uppercase tracking-tight mb-4">Technical_Stack</h2>
-<p class="text-on-surface-variant text-sm mb-8">Current proficiency levels based on production deployments and open-source contributions.</p>
-<div class="space-y-4">
-<div class="p-4 technical-border">
-<p class="font-mono text-[10px] text-primary-fixed uppercase mb-2">Primary_Language</p>
-<p class="font-headline font-bold">Python / TypeScript</p>
-</div>
-<div class="p-4 technical-border">
-<p class="font-mono text-[10px] text-primary-fixed uppercase mb-2">Frameworks</p>
-<p class="font-headline font-bold">FastAPI / React / Flutter</p>
-</div>
-</div>
-</div>
-<div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-<!-- Skill Chips -->
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">Python</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">TypeScript</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">JavaScript</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">C++</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">FastAPI</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">React.js</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">Flutter</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">MongoDB</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">PostgreSQL</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">Docker</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">GitHub Actions</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">OpenAI API</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">Git</div>
-<div class="p-4 border border-outline/10 text-center font-mono text-sm hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors backdrop-blur-sm">Linux</div>
-</div>
-</section>
-<!-- Extras / Marginalia -->
-<section class="mb-32 border-t border-primary-fixed/10 pt-16">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="flex flex-col gap-2">
-<span class="font-mono text-[10px] text-primary-fixed uppercase">Competitive_Coding</span>
-<p class="font-headline font-bold text-xl uppercase">250+ Problems Solved</p>
-<p class="text-on-surface-variant text-sm">Consistent solver on LeetCode focusing on Dynamic Programming and Graphs.</p>
-</div>
-<div class="flex flex-col gap-2">
-<span class="font-mono text-[10px] text-primary-fixed uppercase">Leadership_Sports</span>
-<p class="font-headline font-bold text-xl uppercase">Basketball Captain</p>
-<p class="text-on-surface-variant text-sm">Lead the CSE team to a silver medal in the interbranch tournament. Emphasis on team coordination and high-pressure execution.</p>
-</div>
-<div class="flex flex-col gap-2">
-<span class="font-mono text-[10px] text-primary-fixed uppercase">Linguistics</span>
-<p class="font-headline font-bold text-xl uppercase">English / Kannada /  Hindi</p>
-<p class="text-on-surface-variant text-sm">Trilingual proficiency in technical and interpersonal communication.</p>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-black/90 border-t border-[#c0ff00]/10 w-full py-12 px-6 mt-auto">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-<div>
-<span class="text-[#c0ff00] font-bold font-headline uppercase tracking-widest text-lg">Palguna</span>
-<p class="font-headline text-[10px] uppercase text-white/40 mt-2">© 2026 PALGUNA SHETTY // SYSTEM_OPERATOR</p>
-</div>
-<div class="flex gap-8">
-<a class="font-headline text-[10px] uppercase text-white/40 hover:text-[#c0ff00] transition-opacity" href="mailto:palgunashetty26@gmail.com">EMAIL</a>
-<a class="font-headline text-[10px] uppercase text-white/40 hover:text-[#c0ff00] transition-opacity" href="https://linkedin.com/in/palguna-shetty-ba9924253/">LINKEDIN</a>
-<a class="font-headline text-[10px] uppercase text-white/40 hover:text-[#c0ff00] transition-opacity" href="https://github.com/palguna26">GITHUB</a>
-<a class="font-headline text-[10px] uppercase text-white/40 hover:text-[#c0ff00] transition-opacity" href="https://leetcode.com/palguna26">LEETCODE</a>
-</div>
-<div class="text-right">
-<p class="font-mono text-[10px] text-primary-fixed">LOC: INDIA</p>
-<p class="font-mono text-[10px] text-white/20">40.7128° N, 74.0060° W [REF]</p>
-</div>
-</div>
-</footer>
-</div>
-<!-- Decorative Corner Elements -->
-<div class="fixed bottom-4 left-4 font-mono text-[8px] text-primary-fixed/20 pointer-events-none hidden lg:block z-50">
-        BUILD_HASH: 0x8823FB91A<br/>
-        STATUS: OPERATIONAL
-    </div>
-<div class="fixed top-24 right-4 font-mono text-[8px] text-primary-fixed/20 pointer-events-none hidden lg:block origin-right rotate-90 z-50">
-        SYSTEM_UPTIME: 99.9%
-    </div>
-</body></html>
+
+<body class="selection:bg-accent selection:text-black">
+  <div class="blackhole-gradient"></div>
+  <div class="scanlines"></div>
+
+  <div class="relative z-10">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-accent/10 bg-black/80 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-accent">terminal</span>
+          <span class="text-lg md:text-xl font-semibold tracking-tight text-accent">
+            Palguna_DEV
+          </span>
+        </div>
+
+        <div class="hidden md:flex gap-8">
+          <a href="#hero" class="nav-link nav-link-active">Home</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#skills" class="nav-link">Stack</a>
+          <a href="#education" class="nav-link">Bio</a>
+        </div>
+
+        <a
+          href="https://drive.google.com/file/d/1J643ne5OxFxeV-8hBZR3eoAWytcIRAkY/view?usp=sharing"
+          class="border border-accent px-4 py-2 text-xs uppercase tracking-[0.2em] text-accent hover:bg-accent hover:text-black transition-all"
+        >
+          Resume
+        </a>
+      </div>
+    </nav>
+
+    <main class="pt-28 px-6 md:px-12 max-w-7xl mx-auto">
+      <!-- Hero -->
+      <section id="hero" class="min-h-[72vh] flex flex-col justify-center border-l-2 border-accent pl-8 mb-24 relative">
+        <div class="absolute -left-1 top-0 h-12 w-2 bg-accent"></div>
+
+        <p class="mono-label mb-4 opacity-80">// INITIALIZING_PORTFOLIO_V4.0</p>
+
+        <h1 class="text-6xl md:text-8xl font-semibold tracking-tight leading-[0.9] uppercase mb-6">
+          Palguna <br />
+          <span class="text-accent">Shetty</span>
+        </h1>
+
+        <p class="text-lg md:text-2xl max-w-2xl text-white/70 leading-relaxed mb-10">
+          Building AI-native products, backend systems, and developer tools with a focus on speed, clarity, and practical impact.
+        </p>
+
+        <div class="flex flex-wrap gap-6 text-sm font-mono">
+          <a href="mailto:palgunashetty26@gmail.com" class="flex items-center gap-2 text-accent hover:underline">
+            <span class="material-symbols-outlined text-sm">alternate_email</span> EMAIL
+          </a>
+          <a href="https://www.linkedin.com/in/palguna-shetty-ba9924253/" class="flex items-center gap-2 text-accent hover:underline">
+            <span class="material-symbols-outlined text-sm">link</span> LINKEDIN
+          </a>
+          <a href="https://github.com/palguna26" class="flex items-center gap-2 text-accent hover:underline">
+            <span class="material-symbols-outlined text-sm">code</span> GITHUB
+          </a>
+          <a href="https://leetcode.com/palguna26" class="flex items-center gap-2 text-accent hover:underline">
+            <span class="material-symbols-outlined text-sm">terminal</span> LEETCODE
+          </a>
+        </div>
+      </section>
+
+      <!-- Summary + Education -->
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-28">
+        <div class="md:col-span-8 p-8 card">
+          <h2 class="text-2xl uppercase tracking-[0.18em] text-accent mb-6 flex items-center gap-3 font-semibold">
+            <span class="material-symbols-outlined">person_search</span>
+            Summary
+          </h2>
+          <p class="text-lg leading-relaxed text-white/85">
+            Final-year Computer Science student at JSSTU, Mysuru. I build backend systems, full-stack web apps, and AI-powered developer tools. Interested in startups, fast iteration, and products where engineering quality actually matters.
+          </p>
+        </div>
+
+        <div id="education" class="md:col-span-4 p-8 card">
+          <h2 class="mono-label mb-6 opacity-70">Education</h2>
+          <p class="text-lg font-semibold mb-2">JSS Science and Technology University</p>
+          <p class="text-xs font-mono text-white/60 mb-4 uppercase">B.E. Computer Science // 2022–2026</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-semibold text-accent">8.63</span>
+            <span class="text-sm font-mono text-white/40">/ 10 CGPA</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="mb-28">
+        <div class="flex items-center justify-between mb-10 border-b border-accent/20 pb-4">
+          <h2 class="section-title">Featured Projects</h2>
+          <span class="font-mono text-xs text-accent/60">[COUNT: 04]</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- RevFlo -->
+          <div class="p-8 card flex flex-col min-h-[360px]">
+            <div class="flex justify-between items-start mb-6">
+              <span class="material-symbols-outlined text-accent text-4xl">query_stats</span>
+              <a href="https://github.com/palguna26/revflo" class="text-accent hover:rotate-45 transition-transform">
+                <span class="material-symbols-outlined">north_east</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-semibold mb-2">RevFlo</h3>
+            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">FastAPI • React • MongoDB • GitHub APIs</p>
+            <p class="text-white/70 text-sm leading-relaxed mb-auto">
+              Code review and repository analysis tool that inspects GitHub repos and pull requests for security issues, maintainability, and code quality with real-time webhook triggers.
+            </p>
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <p class="text-[10px] font-mono text-white/35">STABLE_RELEASE // revflo-front.vercel.app</p>
+            </div>
+          </div>
+
+          <!-- PlayGround CLI -->
+          <div class="p-8 card flex flex-col min-h-[360px]">
+            <div class="flex justify-between items-start mb-6">
+              <span class="material-symbols-outlined text-accent text-4xl">terminal</span>
+              <a href="https://github.com/palguna26/PlayGround-CLI" class="text-accent hover:rotate-45 transition-transform">
+                <span class="material-symbols-outlined">north_east</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-semibold mb-2">PlayGround CLI</h3>
+            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Go • llama.cpp • Local LLMs • CLI Tooling</p>
+            <p class="text-white/70 text-sm leading-relaxed mb-auto">
+              Local-first AI coding assistant for the terminal with safety guarantees. Runs offline, supports interactive agent workflows, resumable sessions, and explicit diff-based approval before applying code changes.
+            </p>
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <p class="text-[10px] font-mono text-white/35">OPEN_SOURCE // LOCAL_FIRST_AI_AGENT</p>
+            </div>
+          </div>
+
+          <!-- EvalSmith -->
+          <div class="p-8 card flex flex-col min-h-[360px]">
+            <div class="flex justify-between items-start mb-6">
+              <span class="material-symbols-outlined text-accent text-4xl">rebase_edit</span>
+              <a href="https://github.com/palguna26/EvalSmith" class="text-accent hover:rotate-45 transition-transform">
+                <span class="material-symbols-outlined">north_east</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-semibold mb-2">EvalSmith</h3>
+            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Python • LLM APIs • CI/CD • GitHub Actions</p>
+            <p class="text-white/70 text-sm leading-relaxed mb-auto">
+              LLM prompt regression testing CLI for validating prompt behavior across OpenAI, Anthropic, and Google models with CI/CD gating support.
+            </p>
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <p class="text-[10px] font-mono text-white/35">OPEN_SOURCE // GITHUB_REPOSITORY</p>
+            </div>
+          </div>
+
+          <!-- SleepSensei -->
+          <div class="p-8 card flex flex-col min-h-[360px]">
+            <div class="flex justify-between items-start mb-6">
+              <span class="material-symbols-outlined text-accent text-4xl">bedtime</span>
+              <a href="https://github.com/palguna26/sleep_sensei_ai" class="text-accent hover:rotate-45 transition-transform">
+                <span class="material-symbols-outlined">north_east</span>
+              </a>
+            </div>
+            <h3 class="text-2xl font-semibold mb-2">SleepSensei</h3>
+            <p class="font-mono text-[11px] text-lime-300/80 mb-4 uppercase tracking-[0.18em]">Flutter • Firebase • GPT-4</p>
+            <p class="text-white/70 text-sm leading-relaxed mb-auto">
+              AI sleep coaching app with accelerometer-based sleep detection and personalized coaching insights for better sleep hygiene.
+            </p>
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <p class="text-[10px] font-mono text-white/35">BETA_VERSION // CROSS_PLATFORM</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="mb-28 grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div class="md:col-span-4">
+          <h2 class="section-title mb-4">Technical Stack</h2>
+          <p class="text-white/60 text-sm mb-8">
+            Tools and technologies I’m most comfortable shipping with.
+          </p>
+
+          <div class="space-y-4">
+            <div class="p-4 card">
+              <p class="mono-label mb-2">Primary Languages</p>
+              <p class="font-semibold">Python / TypeScript / Go</p>
+            </div>
+
+            <div class="p-4 card">
+              <p class="mono-label mb-2">Frameworks</p>
+              <p class="font-semibold">FastAPI / React / Flutter</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div class="chip">Python</div>
+          <div class="chip">TypeScript</div>
+          <div class="chip">JavaScript</div>
+          <div class="chip">Go</div>
+          <div class="chip">C++</div>
+          <div class="chip">FastAPI</div>
+          <div class="chip">React.js</div>
+          <div class="chip">Flutter</div>
+          <div class="chip">MongoDB</div>
+          <div class="chip">PostgreSQL</div>
+          <div class="chip">Docker</div>
+          <div class="chip">GitHub Actions</div>
+          <div class="chip">OpenAI API</div>
+          <div class="chip">Git</div>
+          <div class="chip">Linux</div>
+          <div class="chip">llama.cpp</div>
+        </div>
+      </section>
+
+      <!-- Extras -->
+      <section class="mb-28 border-t border-accent/10 pt-14">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="flex flex-col gap-2">
+            <span class="mono-label">Competitive Coding</span>
+            <p class="text-xl font-semibold uppercase">250+ Problems Solved</p>
+            <p class="text-white/65 text-sm">
+              Consistent LeetCode practice with focus on data structures, graphs, and problem-solving under constraints.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <span class="mono-label">Leadership & Sports</span>
+            <p class="text-xl font-semibold uppercase">Basketball Captain</p>
+            <p class="text-white/65 text-sm">
+              Led the CSE team to a silver medal in the inter-branch tournament, with emphasis on execution under pressure.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <span class="mono-label">Languages</span>
+            <p class="text-xl font-semibold uppercase">English / Kannada / Hindi</p>
+            <p class="text-white/65 text-sm">
+              Comfortable across technical communication, collaboration, and presentations.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-accent/10 bg-black/90 py-10 px-6">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div>
+          <span class="text-accent font-semibold uppercase tracking-[0.18em] text-lg">Palguna</span>
+          <p class="text-[10px] uppercase text-white/40 mt-2 tracking-[0.18em]">
+            © 2026 PALGUNA SHETTY
+          </p>
+        </div>
+
+        <div class="flex gap-6 flex-wrap justify-center">
+          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="mailto:palgunashetty26@gmail.com">Email</a>
+          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="https://linkedin.com/in/palguna-shetty-ba9924253/">LinkedIn</a>
+          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="https://github.com/palguna26">GitHub</a>
+          <a class="text-[10px] uppercase text-white/40 hover:text-accent transition-colors tracking-[0.18em]" href="https://leetcode.com/palguna26">LeetCode</a>
+        </div>
+
+        <div class="text-right">
+          <p class="font-mono text-[10px] text-accent">BASED IN KARNATAKA, INDIA</p>
+          <p class="font-mono text-[10px] text-white/20">BUILDING AI + DEV TOOLS</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Decorative labels -->
+  <div class="fixed bottom-4 left-4 font-mono text-[8px] text-accent/20 pointer-events-none hidden lg:block z-50">
+    BUILD_HASH: 0x8823FB91A<br />
+    STATUS: OPERATIONAL
+  </div>
+
+  <div class="fixed top-24 right-4 font-mono text-[8px] text-accent/20 pointer-events-none hidden lg:block origin-right rotate-90 z-50">
+    SYSTEM_UPTIME: 99.9%
+  </div>
+</body>
+</html>

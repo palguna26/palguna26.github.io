@@ -539,6 +539,181 @@
       color: var(--muted);
     }
 
+    /* ── GitHub Activity ── */
+    .github-card {
+      grid-column: span 12;
+      grid-row: span 5;
+      padding: 32px 36px;
+    }
+
+    .github-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .github-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .github-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .github-link:hover { color: var(--accent); }
+
+    /* Contribution grid */
+    .contrib-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(192,255,0,0.2) transparent;
+    }
+    .contrib-wrapper::-webkit-scrollbar { height: 4px; }
+    .contrib-wrapper::-webkit-scrollbar-track { background: transparent; }
+    .contrib-wrapper::-webkit-scrollbar-thumb { background: rgba(192,255,0,0.2); border-radius: 2px; }
+
+    #contrib-grid {
+      display: flex;
+      gap: 3px;
+      min-width: max-content;
+    }
+
+    .contrib-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .contrib-day {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.03);
+      transition: transform 0.15s, border-color 0.15s;
+      cursor: default;
+      position: relative;
+    }
+    .contrib-day:hover {
+      transform: scale(1.4);
+      border-color: rgba(192,255,0,0.4);
+      z-index: 10;
+    }
+
+    /* Level colours — accent-tinted */
+    .contrib-day[data-level="1"] { background: rgba(192,255,0,0.12); }
+    .contrib-day[data-level="2"] { background: rgba(192,255,0,0.28); }
+    .contrib-day[data-level="3"] { background: rgba(192,255,0,0.55); }
+    .contrib-day[data-level="4"] { background: rgba(192,255,0,0.85); }
+
+    .contrib-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+    .contrib-total {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .contrib-total strong {
+      color: var(--accent);
+      font-size: 13px;
+    }
+    .contrib-legend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .legend-box {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+    }
+
+    .contrib-month-labels {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 6px;
+      min-width: max-content;
+    }
+    .month-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .contrib-loading {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-align: center;
+      padding: 40px 0;
+    }
+    .contrib-error {
+      display: none;
+      text-align: center;
+      padding: 32px 0;
+    }
+    .contrib-error p {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .contrib-error a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(192,255,0,0.3);
+      padding: 8px 16px;
+      transition: background 0.2s;
+    }
+    .contrib-error a:hover { background: var(--accent-dim); }
+
+    /* Tooltip */
+    #contrib-tooltip {
+      position: fixed;
+      background: #1a1a1a;
+      border: 1px solid var(--border-hover);
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+
     /* ── Contact ── */
     .contact-section {
       padding: 120px 0 80px;
@@ -641,7 +816,8 @@
       .card-skills-main, .card-skills-grid,
       .card-stat-a, .card-stat-b, .card-stat-c,
       .card-about-main, .card-edu,
-      .card-extra-a, .card-extra-b, .card-extra-c {
+      .card-extra-a, .card-extra-b, .card-extra-c,
+      .github-card {
         grid-column: span 1;
         grid-row: span 1;
       }
@@ -659,19 +835,17 @@
 </head>
 
 <body>
-  <!-- Cursor -->
+  <div id="contrib-tooltip"></div>
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
-
-  <!-- Glow -->
   <div class="glow" id="glow"></div>
 
-  <!-- Nav -->
   <nav id="nav">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">⌘ PALGUNA</a>
       <ul class="nav-links">
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#activity">Activity</a></li>
         <li><a href="#skills">Stack</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -680,7 +854,6 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <div class="page">
     <section id="hero">
       <div class="reveal" style="transition-delay: 0.1s">
@@ -698,11 +871,11 @@
         </p>
         <div class="hero-links">
           <a href="mailto:palgunashetty26@gmail.com" class="hero-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 3L6 7L11 3M1 10H11V2H1V10Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 3L6 7L11 3M1 10H11V2H1V10Z" stroke="currentColor" stroke-width="1.2"/></svg>
             Email
           </a>
           <a href="https://www.linkedin.com/in/palguna-shetty-ba9924253/" target="_blank" class="hero-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4H1V11H2.5V4ZM1.75 3.25C2.3 3.25 2.75 2.8 2.75 2.25S2.3 1.25 1.75 1.25 .75 1.7.75 2.25 1.2 3.25 1.75 3.25ZM11 11H9.5V7.5C9.5 6.7 8.85 6 8 6S6.5 6.7 6.5 7.5V11H5V4H6.5V4.8C6.9 4.3 7.6 4 8.25 4 9.8 4 11 5.2 11 6.75V11Z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4H1V11H2.5V4ZM1.75 3.25C2.3 3.25 2.75 2.8 2.75 2.25S2.3 1.25 1.75 1.25 .75 1.7.75 2.25 1.2 3.25 1.75 3.25ZM11 11H9.5V7.5C9.5 6.7 8.85 6 8 6S6.5 6.7 6.5 7.5V11H5V4H6.5V4.8C6.9 4.3 7.6 4 8.25 4 9.8 4 11 5.2 11 6.75V11Z"/></svg>
             LinkedIn
           </a>
           <a href="https://github.com/palguna26" target="_blank" class="hero-link">
@@ -710,7 +883,7 @@
             GitHub
           </a>
           <a href="https://leetcode.com/palguna26" target="_blank" class="hero-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 6H8.5M6 3.5V8.5" stroke="currentColor" stroke-width="1.2"/></svg>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 6H8.5M6 3.5V8.5" stroke="currentColor" stroke-width="1.2"/></svg>
             LeetCode
           </a>
         </div>
@@ -733,7 +906,6 @@
       </div>
 
       <div class="bento">
-        <!-- Large card: RevFlo -->
         <div class="card card-project-large reveal" style="transition-delay:0.05s">
           <div class="card-inner">
             <div>
@@ -752,7 +924,6 @@
           </div>
         </div>
 
-        <!-- Medium card: PlayGround CLI -->
         <div class="card card-project-medium reveal" style="transition-delay:0.1s">
           <div class="card-inner">
             <div>
@@ -771,7 +942,6 @@
           </div>
         </div>
 
-        <!-- Three small cards -->
         <div class="card card-project-sm-a reveal" style="transition-delay:0.15s">
           <div class="card-inner">
             <div>
@@ -808,7 +978,7 @@
           </div>
         </div>
 
-        <div class="card card-project-sm-c reveal" style="transition-delay:0.25s" style="background: var(--accent-dim); border-color: rgba(192,255,0,0.2);">
+        <div class="card card-project-sm-c reveal" style="transition-delay:0.25s; background: var(--accent-dim); border-color: rgba(192,255,0,0.2);">
           <div class="card-inner" style="justify-content: space-between; height: 100%;">
             <div>
               <div class="project-number" style="color: var(--muted);">Next</div>
@@ -824,33 +994,53 @@
   </div>
 
   <hr class="divider" />
-  <hr class="divider" />
 
-<!-- GitHub Activity -->
-<div class="page">
-  <section id="activity">
-    <div class="section-header reveal">
-      <h2 class="section-title">GitHub Activity</h2>
-      <span class="section-count">Consistency</span>
-    </div>
-
-    <div class="bento">
-      <div class="card reveal" style="grid-column: span 12; padding: 32px; text-align:center;">
-        
-        <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px;">
-          I build. A lot.
-        </p>
-
-        <img 
-          src="https://ghchart.rshah.org/palguna26"
-          alt="GitHub Contribution Graph"
-          
-        />
-
+  <!-- GitHub Activity -->
+  <div class="page">
+    <section id="activity">
+      <div class="section-header reveal">
+        <h2 class="section-title">GitHub Activity</h2>
+        <span class="section-count">Consistency</span>
       </div>
-    </div>
-  </section>
-</div>
+
+      <div class="bento">
+        <div class="card github-card reveal">
+          <div class="github-card-header">
+            <span class="github-label">I build. A lot.</span>
+            <a href="https://github.com/palguna26" target="_blank" class="github-link">
+              View Profile ↗
+            </a>
+          </div>
+
+          <div id="contrib-loading" class="contrib-loading">Loading contributions…</div>
+          <div id="contrib-error" class="contrib-error">
+            <p>Could not load contributions. View them directly on GitHub.</p>
+            <a href="https://github.com/palguna26" target="_blank">Open GitHub Profile ↗</a>
+          </div>
+
+          <div id="contrib-content" style="display:none;">
+            <div class="contrib-wrapper">
+              <div class="contrib-month-labels" id="month-labels"></div>
+              <div id="contrib-grid"></div>
+            </div>
+            <div class="contrib-meta">
+              <span class="contrib-total" id="contrib-total"></span>
+              <div class="contrib-legend">
+                Less
+                <div class="legend-box" style="background:var(--surface2); border:1px solid rgba(255,255,255,0.05);"></div>
+                <div class="legend-box" style="background:rgba(192,255,0,0.12);"></div>
+                <div class="legend-box" style="background:rgba(192,255,0,0.28);"></div>
+                <div class="legend-box" style="background:rgba(192,255,0,0.55);"></div>
+                <div class="legend-box" style="background:rgba(192,255,0,0.85);"></div>
+                More
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- Skills -->
   <div class="page">
     <section id="skills">
@@ -860,7 +1050,6 @@
       </div>
 
       <div class="bento">
-        <!-- Main desc -->
         <div class="card card-skills-main reveal" style="transition-delay:0.05s">
           <div class="card-inner" style="height:100%; justify-content: space-between;">
             <div>
@@ -877,7 +1066,6 @@
           </div>
         </div>
 
-        <!-- Tech grid -->
         <div class="card card-skills-grid reveal" style="transition-delay:0.1s">
           <div class="tech-grid">
             <div class="tech-pill">Python</div>
@@ -899,7 +1087,6 @@
           </div>
         </div>
 
-        <!-- Stats -->
         <div class="card card-stat-a reveal" style="transition-delay:0.15s">
           <p class="stat-number">250+</p>
           <p class="stat-label">LeetCode Problems</p>
@@ -927,7 +1114,6 @@
       </div>
 
       <div class="bento">
-        <!-- About text -->
         <div class="card card-about-main reveal" style="transition-delay:0.05s">
           <div class="card-inner" style="height:100%;">
             <h3 class="about-heading">Building things end-to-end, shipping fast.</h3>
@@ -943,7 +1129,6 @@
           </div>
         </div>
 
-        <!-- Education -->
         <div class="card card-edu reveal" style="transition-delay:0.1s">
           <div class="card-inner" style="height:100%;">
             <p class="edu-label">Education</p>
@@ -957,7 +1142,6 @@
           </div>
         </div>
 
-        <!-- Extras -->
         <div class="card card-extra-a reveal" style="transition-delay:0.15s">
           <span class="extra-icon">⌘</span>
           <h4 class="extra-title">AI Builder</h4>
@@ -1007,13 +1191,11 @@
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursor-ring');
     let mx = 0, my = 0, rx = 0, ry = 0;
-
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
       cursor.style.left = mx + 'px';
       cursor.style.top = my + 'px';
     });
-
     function animRing() {
       rx += (mx - rx) * 0.14;
       ry += (my - ry) * 0.14;
@@ -1029,33 +1211,131 @@
       nav.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // ── Card glow on mousemove ──
+    // ── Card glow ──
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
-        const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
-        card.style.setProperty('--mx', x + '%');
-        card.style.setProperty('--my', y + '%');
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
       });
     });
 
-    // ── Reveal on scroll ──
+    // ── Reveal ──
     const observer = new IntersectionObserver(entries => {
-      entries.forEach((entry, i) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Trigger hero reveals immediately
     setTimeout(() => {
       document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
     }, 80);
+
+    // ── GitHub Contribution Graph ──
+    // Uses GitHub's public contribution SVG via a CORS proxy, with a custom-rendered fallback
+    async function loadContributions() {
+      const username = 'palguna26';
+
+      // Try fetching via a reliable CORS proxy that returns GitHub's contribution data
+      // We'll use the GitHub contributions API through a public proxy
+      try {
+        // Use github-contributions-api (public, free, CORS-enabled)
+        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
+        if (!res.ok) throw new Error('API error');
+        const data = await res.json();
+        renderGrid(data.contributions, data.total);
+      } catch (e) {
+        // Fallback: show error state with direct link
+        document.getElementById('contrib-loading').style.display = 'none';
+        document.getElementById('contrib-error').style.display = 'block';
+      }
+    }
+
+    function renderGrid(contributions, totals) {
+      document.getElementById('contrib-loading').style.display = 'none';
+      document.getElementById('contrib-content').style.display = 'block';
+
+      const grid = document.getElementById('contrib-grid');
+      const monthLabels = document.getElementById('month-labels');
+      const totalEl = document.getElementById('contrib-total');
+      const tooltip = document.getElementById('contrib-tooltip');
+
+      // Total for last year
+      const lastYearTotal = Object.values(totals).reduce((a, b) => a + b, 0);
+      totalEl.innerHTML = `<strong>${lastYearTotal.toLocaleString()}</strong> contributions in the last year`;
+
+      // Group by week
+      const weeks = [];
+      let currentWeek = [];
+      const monthsSeen = new Map(); // weekIndex -> monthName
+
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+      contributions.forEach((day, i) => {
+        // Track month label positions
+        const date = new Date(day.date);
+        const dayOfMonth = date.getDate();
+        if (dayOfMonth <= 7) {
+          const weekIdx = weeks.length;
+          if (!monthsSeen.has(weekIdx)) {
+            monthsSeen.set(weekIdx, MONTHS[date.getMonth()]);
+          }
+        }
+
+        currentWeek.push(day);
+        if (currentWeek.length === 7) {
+          weeks.push(currentWeek);
+          currentWeek = [];
+        }
+      });
+      if (currentWeek.length) weeks.push(currentWeek);
+
+      // Render month labels
+      let labelsHTML = '';
+      weeks.forEach((_, i) => {
+        const label = monthsSeen.get(i) || '';
+        // Each week cell = 12px + 3px gap = 15px wide
+        labelsHTML += `<span class="month-label" style="width:15px; display:inline-block; flex-shrink:0;">${label}</span>`;
+      });
+      monthLabels.innerHTML = labelsHTML;
+
+      // Render grid
+      grid.innerHTML = '';
+      weeks.forEach(week => {
+        const weekEl = document.createElement('div');
+        weekEl.className = 'contrib-week';
+
+        week.forEach(day => {
+          const cell = document.createElement('div');
+          cell.className = 'contrib-day';
+          cell.dataset.level = day.level;
+          cell.dataset.date = day.date;
+          cell.dataset.count = day.count;
+
+          cell.addEventListener('mouseenter', e => {
+            const count = parseInt(cell.dataset.count);
+            const dateStr = new Date(cell.dataset.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            tooltip.textContent = count === 0 ? `No contributions on ${dateStr}` : `${count} contribution${count !== 1 ? 's' : ''} on ${dateStr}`;
+            tooltip.style.opacity = '1';
+          });
+          cell.addEventListener('mousemove', e => {
+            tooltip.style.left = (e.clientX + 14) + 'px';
+            tooltip.style.top = (e.clientY - 28) + 'px';
+          });
+          cell.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+          });
+
+          weekEl.appendChild(cell);
+        });
+        grid.appendChild(weekEl);
+      });
+    }
+
+    loadContributions();
   </script>
 </body>
 </html>

@@ -1254,86 +1254,90 @@
       }
     }
 
-    function renderGrid(contributions, totals) {
-      document.getElementById('contrib-loading').style.display = 'none';
-      document.getElementById('contrib-content').style.display = 'block';
+function renderGrid(contributions, totals) {
+  document.getElementById('contrib-loading').style.display = 'none';
+  document.getElementById('contrib-content').style.display = 'block';
 
-      const grid = document.getElementById('contrib-grid');
-      const monthLabels = document.getElementById('month-labels');
-      const totalEl = document.getElementById('contrib-total');
-      const tooltip = document.getElementById('contrib-tooltip');
+  const grid = document.getElementById('contrib-grid');
+  const monthLabels = document.getElementById('month-labels');
+  const totalEl = document.getElementById('contrib-total');
+  const tooltip = document.getElementById('contrib-tooltip');
 
-      // Total for last year
-      const lastYearTotal = Object.values(totals).reduce((a, b) => a + b, 0);
-      totalEl.innerHTML = `<strong>${lastYearTotal.toLocaleString()}</strong> contributions in the last year`;
+  // Clear previous content to prevent duplicates on re-render
+  monthLabels.innerHTML = '';
+  grid.innerHTML = '';
 
-      // Group by week
-      const weeks = [];
-      let currentWeek = [];
-      const monthsSeen = new Map(); // weekIndex -> monthName
+  // Total for last year
+  const lastYearTotal = Object.values(totals).reduce((a, b) => a + b, 0);
+  totalEl.innerHTML = `<strong>${lastYearTotal.toLocaleString()}</strong> contributions in the last year`;
 
-      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // Group by week
+  const weeks = [];
+  let currentWeek = [];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  
+  // Track which months we've already labeled
+  const monthsLabeled = new Set();
 
-      contributions.forEach((day, i) => {
-        // Track month label positions
-        const date = new Date(day.date);
-        const dayOfMonth = date.getDate();
-        if (dayOfMonth <= 7) {
-          const weekIdx = weeks.length;
-          if (!monthsSeen.has(weekIdx)) {
-            monthsSeen.set(weekIdx, MONTHS[date.getMonth()]);
-          }
-        }
-
-        currentWeek.push(day);
-        if (currentWeek.length === 7) {
-          weeks.push(currentWeek);
-          currentWeek = [];
-        }
-      });
-      if (currentWeek.length) weeks.push(currentWeek);
-
-      // Render month labels
-      let labelsHTML = '';
-      weeks.forEach((_, i) => {
-        const label = monthsSeen.get(i) || '';
-        // Each week cell = 12px + 3px gap = 15px wide
-        labelsHTML += `<span class="month-label" style="width:15px; display:inline-block; flex-shrink:0;">${label}</span>`;
-      });
-      monthLabels.innerHTML = labelsHTML;
-
-      // Render grid
-      grid.innerHTML = '';
-      weeks.forEach(week => {
-        const weekEl = document.createElement('div');
-        weekEl.className = 'contrib-week';
-
-        week.forEach(day => {
-          const cell = document.createElement('div');
-          cell.className = 'contrib-day';
-          cell.dataset.level = day.level;
-          cell.dataset.date = day.date;
-          cell.dataset.count = day.count;
-
-          cell.addEventListener('mouseenter', e => {
-            const count = parseInt(cell.dataset.count);
-            const dateStr = new Date(cell.dataset.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            tooltip.textContent = count === 0 ? `No contributions on ${dateStr}` : `${count} contribution${count !== 1 ? 's' : ''} on ${dateStr}`;
-            tooltip.style.opacity = '1';
-          });
-          cell.addEventListener('mousemove', e => {
-            tooltip.style.left = (e.clientX + 14) + 'px';
-            tooltip.style.top = (e.clientY - 28) + 'px';
-          });
-          cell.addEventListener('mouseleave', () => {
-            tooltip.style.opacity = '0';
-          });
-
-          weekEl.appendChild(cell);
-        });
-        grid.appendChild(weekEl);
-      });
+  contributions.forEach((day) => {
+    currentWeek.push(day);
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek);
+      currentWeek = [];
     }
+  });
+  if (currentWeek.length) weeks.push(currentWeek);
+
+  // Render month labels - only first occurrence of each month
+  let labelsHTML = '';
+  weeks.forEach((week, weekIdx) => {
+    // Check if this week contains a new month
+    const firstDayOfWeek = new Date(week[0].date);
+    const monthKey = firstDayOfWeek.getMonth();
+    const monthName = MONTHS[monthKey];
+    
+    let label = '';
+    // Only show label if we haven't seen this month yet
+    if (!monthsLabeled.has(monthKey)) {
+      monthsLabeled.add(monthKey);
+      label = monthName;
+    }
+    
+    labelsHTML += `<span class="month-label" style="width:15px; display:inline-block; flex-shrink:0;">${label}</span>`;
+  });
+  monthLabels.innerHTML = labelsHTML;
+
+  // Render grid (rest of your code unchanged)
+  weeks.forEach(week => {
+    const weekEl = document.createElement('div');
+    weekEl.className = 'contrib-week';
+
+    week.forEach(day => {
+      const cell = document.createElement('div');
+      cell.className = 'contrib-day';
+      cell.dataset.level = day.level;
+      cell.dataset.date = day.date;
+      cell.dataset.count = day.count;
+
+      cell.addEventListener('mouseenter', e => {
+        const count = parseInt(cell.dataset.count);
+        const dateStr = new Date(cell.dataset.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        tooltip.textContent = count === 0 ? `No contributions on ${dateStr}` : `${count} contribution${count !== 1 ? 's' : ''} on ${dateStr}`;
+        tooltip.style.opacity = '1';
+      });
+      cell.addEventListener('mousemove', e => {
+        tooltip.style.left = (e.clientX + 14) + 'px';
+        tooltip.style.top = (e.clientY - 28) + 'px';
+      });
+      cell.addEventListener('mouseleave', () => {
+        tooltip.style.opacity = '0';
+      });
+
+      weekEl.appendChild(cell);
+    });
+    grid.appendChild(weekEl);
+  });
+}
 
     loadContributions();
   </script>

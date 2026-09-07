@@ -46,6 +46,12 @@
     .about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
     .about-grid p { margin: 0 0 16px; color: var(--muted); }
     .about-grid .lead { color: var(--ink); }
+    .about-grid strong { color: var(--ink); font-weight: 600; }
+    .about-details .benchmark { grid-column: 1 / -1; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .benchmark-values { display: flex; gap: 26px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+    .benchmark-values span { display: grid; gap: 2px; color: var(--muted); font-size: 11px; }
+    .benchmark-values strong { color: var(--green); font-size: 25px; line-height: 1.3; letter-spacing: -.03em; }
+    .benchmark-note { display: block; margin-top: 10px; color: var(--muted); font-size: 11px; }
     dl { margin: 0; font-size: 13px; }
     dl div { margin-bottom: 17px; }
     dt { color: var(--muted); font-size: 11px; }
@@ -126,7 +132,33 @@
 </div>
   <aside class="hero-side"><p>Currently working on <strong style="color:var(--ink);font-weight:500">OpenMem</strong>, an embedded memory engine for agents.</p><a class="text-link" href="https://github.com/palguna26/termyteDB" target="_blank" rel="noreferrer">View project <span aria-hidden="true">↗</span></a></aside>
 </section></div>
-<div class="wrap"><section id="about"><div class="section-head"><h2>About</h2><p class="section-note">A little background</p></div><div class="about-grid"><div><p class="lead">I’m interested in how agents remember, use tools, and stay reliable across long-running work.</p><p>I study Computer Science and Engineering at JSS Science and Technology University, Mysuru. I work across the stack: Python or TypeScript on the backend, SQLite and PostgreSQL for data, and React when a project needs an interface.</p><p>Outside of coding, I led my department’s basketball team to a silver medal.</p></div><dl><div><dt>Based In</dt><dd>Karnataka, India</dd></div><div><dt>Education</dt><dd>B.E. Computer Science, 2022–2026</dd></div><div><dt>Focus</dt><dd>Agent memory & developer tools</dd></div><div><dt>Languages</dt><dd>English, Kannada, Hindi</dd></div></dl></div></section></div>
+<div class="wrap">
+  <section id="about">
+    <div class="section-head"><h2>About</h2><p class="section-note">From idea to working system</p></div>
+    <div class="about-grid">
+      <div>
+        <p class="lead">I build AI infrastructure, backend systems, and developer tools from 0 → 1.</p>
+        <p>Recently, I built an <strong>AI memory and context engine</strong> for conversational agents, covering ingestion, extraction, reconciliation, retrieval, and context generation. I benchmarked its retrieval system on 500 LongMemEval-S questions, reaching <strong>95.4% Recall@5</strong> and <strong>98.4% Recall@15</strong>.</p>
+        <p>I also <strong>led development of Novel Signal</strong>, a competitive intelligence system for a client with over $10 million in revenue. It tracks competitors in real time across Amazon, Flipkart, and Meesho, including keyword rankings.</p>
+        <p>My work spans AI agents, LLM infrastructure, retrieval, backend engineering, and developer tools. I like owning the full engineering loop: understanding the problem, designing the architecture, building, benchmarking, shipping, and fixing what breaks.</p>
+        <p>Outside of coding, I led my department’s basketball team to a silver medal.</p>
+      </div>
+      <dl class="about-details">
+        <div class="benchmark">
+          <dt>Retrieval benchmark</dt>
+          <dd>
+            <span class="benchmark-values"><span><strong>95.4%</strong>Recall@5</span><span><strong>98.4%</strong>Recall@15</span></span>
+            <span class="benchmark-note">500 LongMemEval-S questions · my benchmark run</span>
+          </dd>
+        </div>
+        <div><dt>Looking for</dt><dd>Software Engineer, AI Engineer, and Founding Engineer roles at ambitious startups.</dd></div>
+        <div><dt>Based in</dt><dd>Karnataka, India</dd></div>
+        <div><dt>Education</dt><dd>B.E. Computer Science<br>JSS Science and Technology University<br>2022–2026</dd></div>
+        <div><dt>Languages</dt><dd>English, Kannada, Hindi</dd></div>
+      </dl>
+    </div>
+  </section>
+</div>
 <div class="wrap"><section id="projects"><div class="section-head"><h2>Selected projects</h2><p class="section-note">Code & experiments</p></div><div class="projects">
 <a class="project" href="https://github.com/palguna26/termyteDB" target="_blank" rel="noreferrer"><div><h3>OpenMem</h3><span class="project-meta">Agent memory</span><div class="stack">Python · SQLite · LongMemEval</div></div><p>An embedded memory engine that stores conversation events, extracts durable memories with evidence, reconciles updates, and retrieves useful context.</p><span class="arrow" aria-hidden="true">↗</span></a>
 <a class="project" href="https://github.com/palguna26/Freshbrief-Agent" target="_blank" rel="noreferrer"><div><h3>FreshBrief</h3><span class="project-meta">Research agent</span><div class="stack">Python · LangGraph · LangChain</div></div><p>Finds relevant information and turns it into concise research briefs with source citations.</p><span class="arrow" aria-hidden="true">↗</span></a>
